@@ -1,6 +1,6 @@
 ﻿using KeyWordCounterApp;
 
 
-// Code
+// Application start
 
 CLI.Instance.RunApplicationCLI();

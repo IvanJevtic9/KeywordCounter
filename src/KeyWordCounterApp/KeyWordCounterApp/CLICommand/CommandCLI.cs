@@ -1,4 +1,4 @@
-﻿namespace KeyWordCounterApp.Models
+﻿namespace KeyWordCounterApp.CLICommand
 {
     public abstract class CommandCLI
     {
@@ -11,7 +11,5 @@
             CLI.Instance.ConsoleLog($"INVALID COMMAND: {errMessage}", consoleColor: ConsoleColor.Red);
             CLI.Instance.ConsoleLog(Description, consoleColor: ConsoleColor.Red);
         }
-
-        // Command Handler TODO
     }
 }

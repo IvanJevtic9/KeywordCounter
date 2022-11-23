@@ -1,10 +1,9 @@
-﻿namespace KeyWordCounterApp.Models
+﻿namespace KeyWordCounterApp.CLICommand
 {
     public class HelpCommand : CommandCLI
     {
         public override string Name => "help";
         public override string Description => "Usage: help <command>";
-
         public override Action<string[]> HandleCommand => (commands) =>
         {
             try

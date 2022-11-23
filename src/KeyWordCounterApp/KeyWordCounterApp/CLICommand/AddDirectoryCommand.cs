@@ -1,4 +1,4 @@
-﻿namespace KeyWordCounterApp.Models
+﻿namespace KeyWordCounterApp.CLICommand
 {
     public class AddDirectoryCommand : CommandCLI
     {
@@ -11,6 +11,7 @@
             {
                 var dir = commands[1].Trim();
 
+                // Some example
                 CLI.Instance.ConsoleLog("Starting file scan for file|corpus_a2", consoleColor: ConsoleColor.DarkGreen);
                 CLI.Instance.ConsoleLog("Starting file scan for file|corpus_b", consoleColor: ConsoleColor.DarkGreen);
             }

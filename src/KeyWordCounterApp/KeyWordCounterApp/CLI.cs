@@ -1,11 +1,11 @@
-﻿using KeyWordCounterApp.Models;
-using System.Collections.Concurrent;
+﻿using KeyWordCounterApp.CLICommand;
 
 namespace KeyWordCounterApp
 {
     public class CLI
     {
-        private static bool _inputLock;
+        private bool _inputLock;
+        private static Lazy<CLI> _instance = new Lazy<CLI>(() => new CLI());
 
         /* Available commands */
         private static readonly HelpCommand _helpCommand = new();
@@ -14,12 +14,24 @@ namespace KeyWordCounterApp
         private CLI()
         { }
 
-        private static Lazy<CLI> _instance = new Lazy<CLI>(() => new CLI());
         public static CLI Instance => _instance.Value;
 
-        public static void SetInputLock(bool value)
+        public void SetInputLock(bool value)
         {
             _inputLock = value;
+        }
+
+        public CommandCLI? ParseCommand(string command)
+        {
+            switch (command)
+            {
+                case "help":
+                    return _helpCommand;
+                case "ad":
+                    return _addDirectoryCommand;
+                default:
+                    return null;
+            }
         }
 
         public void ConsoleLog(string message, bool newRow = true, ConsoleColor consoleColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black)
@@ -61,25 +73,5 @@ namespace KeyWordCounterApp
                 }
             }
         }
-
-        public CommandCLI? ParseCommand(string command)
-        {
-            switch (command)
-            {
-                case "help":
-                    return _helpCommand;
-                case "ad":
-                    return _addDirectoryCommand;
-                default:
-                    return null;
-            }
-        }
     }
 }
-
-
-/*
-   Slucajevi koriscenja
-    1. Cekamo na unos komande && Ne ispisuje se output (lock za ispis)
-    2. Ispisuje se output komande (lock za upis)
- */
