@@ -3,14 +3,14 @@
     public class HelpCommand : CommandCLI
     {
         public override string Name => "help";
-        public override string Description => "Usage: help <command>";
+        public override string Description => "Usage: help <command>\nAvailable commands: [ad]";
         public override Action<string[]> HandleCommand => (commands) =>
         {
             try
             {
                 var comm = CLI.Instance.ParseCommand(commands[1].Trim());
 
-                if (comm == null)
+                if (comm is null)
                 {
                     InvalidCommandLog("Wrong usage");
                     return;

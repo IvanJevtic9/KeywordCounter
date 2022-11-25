@@ -2,7 +2,7 @@
 
 namespace KeyWordCounterApp
 {
-    public class CLI
+    public class CLI : IDisposable
     {
         private bool _inputLock;
         private static Lazy<CLI> _instance = new Lazy<CLI>(() => new CLI());
@@ -10,6 +10,7 @@ namespace KeyWordCounterApp
         /* Available commands */
         private static readonly HelpCommand _helpCommand = new();
         private static readonly AddDirectoryCommand _addDirectoryCommand = new();
+        private static readonly ExitCommand _exitCommand = new();
 
         private CLI()
         { }
@@ -29,6 +30,8 @@ namespace KeyWordCounterApp
                     return _helpCommand;
                 case "ad":
                     return _addDirectoryCommand;
+                case "exit":
+                    return _exitCommand;
                 default:
                     return null;
             }
@@ -73,5 +76,22 @@ namespace KeyWordCounterApp
                 }
             }
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        #region Events
+        public virtual void OnStopApplication(StopApplicationArgs stopArgs)
+        {
+            if (StopApplication != null)
+            {
+                StopApplication(this, stopArgs);
+            }
+        }
+
+        public event EventHandler<StopApplicationArgs> StopApplication;
+        #endregion
     }
 }
