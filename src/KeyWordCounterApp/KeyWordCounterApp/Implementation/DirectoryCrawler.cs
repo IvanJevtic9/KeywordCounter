@@ -1,5 +1,4 @@
-﻿using KeyWordCounterApp.Config;
-using KeyWordCounterApp.Implementation.Jobs;
+﻿using KeyWordCounterApp.Implementation.Jobs;
 
 namespace KeyWordCounterApp.Implementation
 {

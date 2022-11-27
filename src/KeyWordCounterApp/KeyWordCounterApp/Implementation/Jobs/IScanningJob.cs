@@ -7,9 +7,7 @@ namespace KeyWordCounterApp.Implementation.Jobs
         public string Name { get; init; }
 
         ScanType GetJobType();
-
         public string GetQuery();
-
-        public void ExecuteJob();
+        public Task ExecuteJob();
     }
 }

@@ -12,6 +12,7 @@ namespace KeyWordCounterApp.Implementation
         private static readonly HelpCommand _helpCommand = new();
         private static readonly AddDirectoryCommand _addDirectoryCommand = new();
         private static readonly ExitCommand _exitCommand = new();
+        private static readonly GetResultCommand _getResultCommand = new();
 
         #region Public Methods
         public static CLI Instance => _instance.Value;
@@ -26,6 +27,8 @@ namespace KeyWordCounterApp.Implementation
                     return _addDirectoryCommand;
                 case "exit":
                     return _exitCommand;
+                case "get":
+                    return _getResultCommand;
                 default:
                     return null;
             }

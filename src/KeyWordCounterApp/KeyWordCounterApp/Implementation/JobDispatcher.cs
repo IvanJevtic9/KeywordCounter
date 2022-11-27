@@ -29,7 +29,7 @@ namespace KeyWordCounterApp.Implementation
             }
         }
 
-        public void Run(CancellationToken cancellationToken)
+        public async void Run(CancellationToken cancellationToken)
         {
             sleepMode = false;
 
@@ -48,20 +48,18 @@ namespace KeyWordCounterApp.Implementation
                     break;
                 }
 
-                if (_executeHistory.ContainsKey(job.Name))
+                success = _executeHistory.TryGetValue(job.Name, out DateTime lastExecuteTime);
+                if (success)
                 {
-                    _executeHistory.TryGetValue(job.Name, out DateTime lastExecuteTime);
-                    lastExecuteTime.AddMinutes(10);
-
-                    if(DateTime.Compare(DateTime.Now, lastExecuteTime) >= 0)
+                    lastExecuteTime = lastExecuteTime.AddMinutes(10);
+                    if (DateTime.Compare(DateTime.Now, lastExecuteTime) < 0)
                     {
-                        _executeHistory.AddOrUpdate(job.Name, null, (key, value) => DateTime.Now);
-                        job.ExecuteJob();
+                        continue;
                     }
                 }
 
-                _executeHistory.TryAdd(job.Name, DateTime.Now);
-                job.ExecuteJob();
+                _executeHistory.AddOrUpdate(job.Name, DateTime.Now, (key, value) => DateTime.Now);
+                await job.ExecuteJob();
             }
         }
 

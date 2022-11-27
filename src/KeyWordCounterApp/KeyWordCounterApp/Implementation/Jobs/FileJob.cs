@@ -1,4 +1,5 @@
 ﻿using KeyWordCounterApp.Models;
+using System.Text;
 
 namespace KeyWordCounterApp.Implementation.Jobs
 {
@@ -22,26 +23,62 @@ namespace KeyWordCounterApp.Implementation.Jobs
             return $"get file|{Name}";
         }
 
-        public void ExecuteJob()
+        public async Task ExecuteJob()
         {
-            // Register Job in Result retriver - TODO
+            ResultRetriver.Instance.InitializeJobResult(this);
+
+            var tasks = new List<Task>();
 
             var dir = new DirectoryInfo(FullName);
-
             var files = dir.GetFiles();
 
             long currentChunkSize = 0;
-            List<FileInfo> currentChunkFiles = new ();
+            List<FileInfo> currentChunkFiles = new();
             foreach (var file in files)
             {
                 currentChunkSize += file.Length;
                 currentChunkFiles.Add(file);
                 if (currentChunkSize >= Program.AppSettings.FileSizeLimit)
                 {
-                    // start execute thread
-                    currentChunkFiles.Clear();
+                    tasks.Add(Task.Factory.StartNew(() => ScanFile(new List<FileInfo>(currentChunkFiles).ToArray())));
+
+                    Thread.Sleep(10);
+                    currentChunkFiles = new ();
                     currentChunkSize = 0;
                 }
+            }
+
+            await Task.Factory.ContinueWhenAll(tasks.ToArray(), (tasks) =>
+            {
+                ResultRetriver.Instance.UpdateScanStatus(Name, ScanStatus.COMPLETED);
+            });
+        }
+
+        private void ScanFile(FileInfo[] files)
+        {
+            int a = 0;
+            int b = 0;
+            int c = 0;
+
+            if(files.Length > 0)
+            {
+                for (int index = 0; index < files.Length; index++)
+                {
+                    using var fs = files[index].OpenRead();
+                    using var st = new StreamReader(fs, Encoding.UTF8);
+
+                    string content = st.ReadToEnd();
+                    var words = content.Split(' ');
+
+                    for (int i = 0; i < words.Length; i++)
+                    {
+                        if (words[i] == Program.AppSettings.KeyWords[0]) ++a;
+                        else if (words[i] == Program.AppSettings.KeyWords[1]) ++b;
+                        else if (words[i] == Program.AppSettings.KeyWords[2]) ++c;
+                    }
+                }
+
+                ResultRetriver.Instance.InsertResult(Name, Thread.CurrentThread.ManagedThreadId, new Result(a, b, c));
             }
         }
     }
