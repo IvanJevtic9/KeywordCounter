@@ -1,24 +1,24 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 
 namespace KeyWordCounterApp.Config
 {
-    public class AppSetings : IDisposable
+    public class AppSettings
     {
         private const string FileName = "appSettings.json";
 
-        public string[] KeyWords { get; init; }
-        public string DirPrefix { get; init; }
-        public int CrawlerSleepTime { get; init; }
-        public int FileSizeLimit { get; init; }
-        public int HopCount { get; init; }
-        public int UrlRefreshTime { get; init; }
+        public string[] KeyWords { get; set; }
+        public string DirPrefix { get; set; }
+        public int CrawlerSleepTime { get; set; }
+        public int FileSizeLimit { get; set; }
+        public int HopCount { get; set; }
+        public int UrlRefreshTime { get; set; }
 
-        private AppSetings()
+        public void Load()
         {
             using (var streamReader = new StreamReader(FileName))
             {
                 var content = streamReader.ReadToEnd();
-                var settings = JsonConvert.DeserializeObject<AppSetings>(content);
+                var settings = JsonSerializer.Deserialize<AppSettings>(content);
 
                 KeyWords = settings.KeyWords;
                 DirPrefix = settings.DirPrefix;
@@ -27,15 +27,6 @@ namespace KeyWordCounterApp.Config
                 HopCount = settings.HopCount;
                 UrlRefreshTime = settings.UrlRefreshTime;
             }
-        }
-
-        private static Lazy<AppSetings> _lazyAppSetings => new Lazy<AppSetings>(() => new AppSetings());
-
-        public static AppSetings Instance => _lazyAppSetings.Value;
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }

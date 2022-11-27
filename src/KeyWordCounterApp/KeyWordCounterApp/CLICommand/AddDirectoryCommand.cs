@@ -1,19 +1,26 @@
-﻿namespace KeyWordCounterApp.CLICommand
+﻿using KeyWordCounterApp.Implementation;
+
+namespace KeyWordCounterApp.CLICommand
 {
     public class AddDirectoryCommand : CommandCLI
     {
         public override string Name => "ad";
-        public override string Description => "Usage: ad <valid_directory_path>\nCommand for adding new directory path in list that directory crawler is going to search.";
+        public override string Description =>
+            $"Usage: {Name} <path>\n" +
+            "Description: Command for adding new directory path that dir crawler is going to visit during his search.";
 
         public override Action<string[]> HandleCommand => (commands) =>
         {
             try
             {
-                var dir = commands[1].Trim();
+                var dir = string.Join(' ', commands[1..]);
 
-                // Some example
-                CLI.Instance.ConsoleLog("Starting file scan for file|corpus_a2", consoleColor: ConsoleColor.DarkGreen);
-                CLI.Instance.ConsoleLog("Starting file scan for file|corpus_b", consoleColor: ConsoleColor.DarkGreen);
+                var success = DirectoryCrawler.Instance.AddDir(dir, out string errorMessage);
+
+                if (!success)
+                {
+                    InvalidCommandLog(errorMessage, false);
+                }
             }
             catch
             {

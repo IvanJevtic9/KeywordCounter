@@ -1,4 +1,4 @@
-﻿namespace KeyWordCounterApp
+﻿namespace KeyWordCounterApp.Models
 {
     public class StopApplicationArgs
     { }

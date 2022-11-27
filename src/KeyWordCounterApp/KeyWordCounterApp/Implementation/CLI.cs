@@ -1,10 +1,11 @@
 ﻿using KeyWordCounterApp.CLICommand;
+using KeyWordCounterApp.Models;
 
-namespace KeyWordCounterApp
+namespace KeyWordCounterApp.Implementation
 {
     public class CLI : IDisposable
     {
-        private bool _inputLock;
+        private bool _onExit;
         private static Lazy<CLI> _instance = new Lazy<CLI>(() => new CLI());
 
         /* Available commands */
@@ -12,17 +13,10 @@ namespace KeyWordCounterApp
         private static readonly AddDirectoryCommand _addDirectoryCommand = new();
         private static readonly ExitCommand _exitCommand = new();
 
-        private CLI()
-        { }
-
+        #region Public Methods
         public static CLI Instance => _instance.Value;
 
-        public void SetInputLock(bool value)
-        {
-            _inputLock = value;
-        }
-
-        public CommandCLI? ParseCommand(string command)
+        public CommandCLI ParseCommand(string command)
         {
             switch (command)
             {
@@ -55,7 +49,7 @@ namespace KeyWordCounterApp
         {
             while (true)
             {
-                if (!_inputLock)
+                if (!_onExit)
                 {
                     ConsoleLog(">> ", false);
                     var commandLine = Console.ReadLine();
@@ -64,9 +58,9 @@ namespace KeyWordCounterApp
 
                     if (commandSplit is not null && commandSplit.Length > 0)
                     {
-                        CommandCLI? commandCLI = ParseCommand(commandSplit[0].Trim());
-                        
-                        if(commandCLI is null)
+                        CommandCLI commandCLI = ParseCommand(commandSplit[0].Trim());
+
+                        if (commandCLI is null)
                         {
                             ConsoleLog("Unknown command.", consoleColor: ConsoleColor.Red);
                         }
@@ -76,15 +70,31 @@ namespace KeyWordCounterApp
                 }
             }
         }
+        #endregion
+
+        #region Dispose
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (Instance != null)
+            {
+                ConsoleLog($"{nameof(CLI)} shutted down.", consoleColor: ConsoleColor.Green);
+                Console.ForegroundColor = ConsoleColor.White;
+
+                _instance = null;
+
+                GC.SuppressFinalize(this);
+
+                Thread.Sleep(500);
+            }
         }
+        #endregion
 
         #region Events
         public virtual void OnStopApplication(StopApplicationArgs stopArgs)
         {
+            _onExit = true;
+
             if (StopApplication != null)
             {
                 StopApplication(this, stopArgs);
