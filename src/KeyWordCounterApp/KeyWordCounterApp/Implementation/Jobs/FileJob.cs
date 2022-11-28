@@ -1,5 +1,6 @@
 ﻿using KeyWordCounterApp.Models;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace KeyWordCounterApp.Implementation.Jobs
 {
@@ -43,7 +44,7 @@ namespace KeyWordCounterApp.Implementation.Jobs
                     tasks.Add(Task.Factory.StartNew(() => ScanFile(new List<FileInfo>(currentChunkFiles).ToArray())));
 
                     Thread.Sleep(10);
-                    currentChunkFiles = new ();
+                    currentChunkFiles = new();
                     currentChunkSize = 0;
                 }
             }
@@ -60,7 +61,8 @@ namespace KeyWordCounterApp.Implementation.Jobs
             int b = 0;
             int c = 0;
 
-            if(files.Length > 0)
+            string pattern = "[\r|\n|\t]";
+            if (files.Length > 0)
             {
                 for (int index = 0; index < files.Length; index++)
                 {
@@ -68,8 +70,8 @@ namespace KeyWordCounterApp.Implementation.Jobs
                     using var st = new StreamReader(fs, Encoding.UTF8);
 
                     string content = st.ReadToEnd();
-                    var words = content.Split(' ');
-
+                    content = Regex.Replace(content, pattern, " ");
+                    var words = content.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
                     for (int i = 0; i < words.Length; i++)
                     {
                         if (words[i] == Program.AppSettings.KeyWords[0]) ++a;
@@ -78,7 +80,7 @@ namespace KeyWordCounterApp.Implementation.Jobs
                     }
                 }
 
-                ResultRetriver.Instance.InsertResult(Name, Thread.CurrentThread.ManagedThreadId, new Result(a, b, c));
+                ResultRetriver.Instance.InsertResult(Name, new Result(a, b, c));
             }
         }
     }

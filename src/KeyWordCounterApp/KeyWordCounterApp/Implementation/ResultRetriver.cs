@@ -1,6 +1,5 @@
 ﻿using KeyWordCounterApp.Implementation.Jobs;
 using KeyWordCounterApp.Models;
-using System.Collections.Concurrent;
 using System.Text;
 
 namespace KeyWordCounterApp.Implementation
@@ -9,74 +8,90 @@ namespace KeyWordCounterApp.Implementation
     {
         private static Lazy<ResultRetriver> _resultRetriver = new Lazy<ResultRetriver>(() => new ResultRetriver());
 
-        private ConcurrentDictionary<string, (ScanStatus Status, ScanType Type, ConcurrentDictionary<int, Result> Result)> Result;
+        private Mutex _resultMutex = new();
+        private Dictionary<string, (ScanStatus Status, ScanType Type, Result Result)> _result;
 
         public ResultRetriver()
         {
-            Result = new();
+            _result = new();
         }
 
         public static ResultRetriver Instance => _resultRetriver.Value;
 
         public void InitializeJobResult(IScanningJob scanningJob)
         {
-            Result.AddOrUpdate(scanningJob.Name,
-                (name) => (ScanStatus.IN_PROGRESS, scanningJob.GetJobType(), new()),
-                (name, oldResult) => (ScanStatus.IN_PROGRESS, scanningJob.GetJobType(), new()));
+            var hasLock = _resultMutex.WaitOne();
+            try
+            {
+                _result.Add(scanningJob.Name, (ScanStatus.IN_PROGRESS, scanningJob.GetJobType(), new Result(0, 0, 0)));
+            }
+            finally
+            {
+                if (hasLock) _resultMutex.ReleaseMutex();
+            }
         }
 
-        public void InsertResult(string name, int threadId, Result result)
+        public void InsertResult(string name, Result result)
         {
-            var success = Result.TryGetValue(name, out var value);
-            if (!success)
+            var resultLock = _resultMutex.WaitOne();
+            try
             {
-                // Log missing job
-                return;
-            }
+                if (!_result.ContainsKey(name))
+                {
+                    return;
+                }
 
-            if (value.Result == null)
+                var r = _result[name];
+                _result[name] = (r.Status, r.Type, r.Result + result);
+            }
+            finally
             {
-                value.Result = new();
+                if (resultLock) _resultMutex.ReleaseMutex();
             }
-
-            value.Result.TryAdd(threadId, result);
         }
 
         public void UpdateScanStatus(string name, ScanStatus status)
         {
-            var success = Result.TryGetValue(name, out var value);
-            if (!success)
+            var resultLock = _resultMutex.WaitOne();
+            try
             {
-                // Log missing job
-                return;
-            }
+                if (!_result.ContainsKey(name))
+                {
+                    return;
+                }
 
-            value.Status = status;
-            Result[name] = value;
+                var r = _result[name];
+                _result[name] = (status, r.Type, r.Result);
+            }
+            finally
+            {
+                if (resultLock) _resultMutex.ReleaseMutex();
+            }
         }
 
         public string GetResult(string name)
         {
-            var success = Result.TryGetValue(name, out var value);
-            if (!success)
+            var hasLock = _resultMutex.WaitOne();
+
+            if (!_result.ContainsKey(name))
             {
-                return "Result does not exist.";
+                if (hasLock) _resultMutex.ReleaseMutex();
+                return $"Job {name} result not found.";
             }
 
-            if(value.Status == ScanStatus.IN_PROGRESS)
+            var value = _result[name];
+            if (hasLock) _resultMutex.ReleaseMutex();
+
+            if (value.Status == ScanStatus.IN_PROGRESS)
             {
                 return "Job status is still in progress.";
             }
 
             var builder = new StringBuilder();
+            
             builder.AppendLine($"{Constants.GetStarBorder(25)} {value.Type.ToString()} - Summary {Constants.GetStarBorder(25)}");
-            foreach (var key in value.Result.Keys)
-            {
-                value.Result.TryGetValue(key, out var result);
-                (int a,int b,int c) = result;
-                builder.AppendLine("{one=" + a + ", two=" + b + ", three=" + c + "}");
-            }
-            builder.AppendLine($"{Constants.GetStarBorder(65)}");
+            builder.AppendLine($"{name} {value.Result.ToString()}");
+            builder.Append($"{Constants.GetStarBorder(66)}");
 
             return builder.ToString();
         }

@@ -29,3 +29,4 @@ public partial class Program
 }
 
 // ad D:\source\Git\KeywordCounter\src\KeyWordCounterApp\KeyWordCounterApp\corpus_A\
+// corpus_A - Copy
