@@ -33,8 +33,8 @@ namespace KeyWordCounterApp.Implementation
             var haveLock = _dirMutex.WaitOne();
             try
             {
+                CLI.Instance.ConsoleLog($"Adding dir {path}", nameof(DirectoryCrawler), consoleColor: ConsoleColor.DarkGreen);
                 success = _directories.Add(path);
-                
             }
             finally
             {
@@ -58,13 +58,13 @@ namespace KeyWordCounterApp.Implementation
                     return;
                 }
 
-                var haveLock = _dirMutex.WaitOne();                    
+                var haveLock = _dirMutex.WaitOne();
                 foreach (var directoryPath in _directories)
                 {
                     if (haveLock) _dirMutex.ReleaseMutex();
-                    
+
                     BFSDirectorySearch(new DirectoryInfo(directoryPath));
-                    
+
                     haveLock = _dirMutex.WaitOne();
                 }
 
@@ -82,7 +82,7 @@ namespace KeyWordCounterApp.Implementation
         {
             if (Instance != null)
             {
-                CLI.Instance.ConsoleLog($"{nameof(DirectoryCrawler)} shutted down.", consoleColor: ConsoleColor.Green);
+                CLI.Instance.ConsoleLog($"{nameof(DirectoryCrawler)} shutted down.", nameof(DirectoryCrawler), consoleColor: ConsoleColor.Green);
 
                 _directoryCrawler = null;
                 _directories = null;
@@ -108,9 +108,17 @@ namespace KeyWordCounterApp.Implementation
                 JobDispatcher.Instance.CreateAJob(new FileJob(root.FullName));
             }
 
-            var dirs = root.GetDirectories();
+            DirectoryInfo[] dirs = null;
+            try
+            {
+                dirs = root.GetDirectories();
+            }
+            catch
+            {
+                // log error
+            }
 
-            for(int i = 0; i < dirs.Length; i++)
+            for (int i = 0; i < dirs.Length; i++)
             {
                 BFSDirectorySearch(dirs[i]);
             }

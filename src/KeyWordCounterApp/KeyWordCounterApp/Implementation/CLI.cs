@@ -13,6 +13,7 @@ namespace KeyWordCounterApp.Implementation
         private static readonly AddDirectoryCommand _addDirectoryCommand = new();
         private static readonly ExitCommand _exitCommand = new();
         private static readonly GetResultCommand _getResultCommand = new();
+        private static readonly ListFileResultCommand _listFileResultCommand = new();
 
         #region Public Methods
         public static CLI Instance => _instance.Value;
@@ -29,15 +30,22 @@ namespace KeyWordCounterApp.Implementation
                     return _exitCommand;
                 case "get":
                     return _getResultCommand;
+                case "file_ls":
+                    return _listFileResultCommand;
                 default:
                     return null;
             }
         }
 
-        public void ConsoleLog(string message, bool newRow = true, ConsoleColor consoleColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black)
+        public void ConsoleLog(string message, string location = nameof(CLI), bool newRow = true, ConsoleColor consoleColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black)
         {
             Console.ForegroundColor = consoleColor;
             Console.BackgroundColor = backgroundColor;
+
+            if (newRow)
+            {
+                LogToFile(message, location);
+            }
 
             if (newRow)
             {
@@ -48,28 +56,33 @@ namespace KeyWordCounterApp.Implementation
             Console.Write(message);
         }
 
+        public void LogToFile(string message, string location)
+        {
+            File.AppendAllText(Constants.LogFile, $"[{DateTime.Now}][Thread-{Thread.CurrentThread.ManagedThreadId}][{location}] {message}\n");
+        }
+
         public void RunApplicationCLI()
         {
             while (true)
             {
-                if (!_onExit)
+                if (_onExit) break;
+
+                ConsoleLog(">> ", newRow: false);
+                var commandLine = Console.ReadLine();
+                LogToFile(commandLine, nameof(CLI));
+
+                var commandSplit = commandLine?.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+                if (commandSplit is not null && commandSplit.Length > 0)
                 {
-                    ConsoleLog(">> ", false);
-                    var commandLine = Console.ReadLine();
+                    CommandCLI commandCLI = ParseCommand(commandSplit[0].Trim());
 
-                    var commandSplit = commandLine?.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-
-                    if (commandSplit is not null && commandSplit.Length > 0)
+                    if (commandCLI is null)
                     {
-                        CommandCLI commandCLI = ParseCommand(commandSplit[0].Trim());
-
-                        if (commandCLI is null)
-                        {
-                            ConsoleLog("Unknown command.", consoleColor: ConsoleColor.Red);
-                        }
-
-                        commandCLI?.HandleCommand.Invoke(commandSplit);
+                        ConsoleLog("Unknown command.", consoleColor: ConsoleColor.Red);
                     }
+
+                    commandCLI?.HandleCommand.Invoke(commandSplit);
                 }
             }
         }

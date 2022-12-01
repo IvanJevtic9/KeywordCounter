@@ -1,0 +1,137 @@
+﻿[12/1/2022 11:35:45 AM][Thread-1][CLI] dasdkjas
+[12/1/2022 11:35:45 AM][Thread-1][CLI] Unknown command.
+[12/1/2022 11:36:02 AM][Thread-1][CLI] Hello world
+[12/1/2022 11:36:02 AM][Thread-1][CLI] Unknown command.
+[12/1/2022 11:36:14 AM][Thread-1][CLI] ad ad D:\source\Git\KeywordCounter\src\KeyWordCounterApp\KeyWordCounterApp\corpus_A\
+[12/1/2022 11:36:14 AM][Thread-1][CLI] Invalid path.
+[12/1/2022 11:36:17 AM][Thread-1][CLI] ad D:\source\Git\KeywordCounter\src\KeyWordCounterApp\KeyWordCounterApp\corpus_A\
+[12/1/2022 11:36:17 AM][Thread-1][DirectoryCrawler] Adding dir D:\source\Git\KeywordCounter\src\KeyWordCounterApp\KeyWordCounterApp\corpus_A\
+[12/1/2022 11:36:17 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:36:17 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:36:17 AM][Thread-7][FileJob] Starting file scan for get file|corpus_A
+[12/1/2022 11:36:17 AM][Thread-12][FileJob] Starting file scan for get file|corpus_A - Copy
+[12/1/2022 11:36:19 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:36:19 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:36:21 AM][Thread-1][CLI] get corpus_A
+[12/1/2022 11:36:21 AM][Thread-1][CLI] 
+************************* FILE - Summary *************************
+corpus_A [one=1140, two=63, three=7]
+******************************************************************
+[12/1/2022 11:36:21 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:36:21 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:36:23 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:36:23 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:36:25 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:36:25 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:36:27 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:36:27 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:36:29 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:36:29 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:36:29 AM][Thread-1][CLI] get corpus_A - Copy
+[12/1/2022 11:36:29 AM][Thread-1][CLI] 
+************************* FILE - Summary *************************
+corpus_A [one=1140, two=63, three=7]
+******************************************************************
+[12/1/2022 11:36:31 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:36:31 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:36:31 AM][Thread-1][CLI] exit
+[12/1/2022 11:36:31 AM][Thread-1][DirectoryCrawler] DirectoryCrawler shutted down.
+[12/1/2022 11:36:32 AM][Thread-1][CLI] CLI shutted down.
+[12/1/2022 11:52:44 AM][Thread-1][CLI] file_ls
+[12/1/2022 11:52:44 AM][Thread-1][CLI] 
+[12/1/2022 11:53:27 AM][Thread-1][CLI] file_ls
+[12/1/2022 11:53:36 AM][Thread-1][CLI] ad D:\source\Git\KeywordCounter\src\KeyWordCounterApp\KeyWordCounterApp\corpus_A\
+[12/1/2022 11:53:36 AM][Thread-1][DirectoryCrawler] Adding dir D:\source\Git\KeywordCounter\src\KeyWordCounterApp\KeyWordCounterApp\corpus_A\
+[12/1/2022 11:53:37 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:37 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:37 AM][Thread-8][FileJob] Starting file scan for get file|corpus_A
+[12/1/2022 11:53:38 AM][Thread-10][FileJob] Starting file scan for get file|corpus_A - Copy
+[12/1/2022 11:53:39 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:39 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:40 AM][Thread-1][CLI] file_ls
+[12/1/2022 11:53:40 AM][Thread-1][CLI] corpus_A corpus_A - Copy 
+[12/1/2022 11:53:41 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:41 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:43 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:43 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:45 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:45 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:47 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:47 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:49 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:49 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:51 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:51 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:52 AM][Thread-1][CLI] get corpus_A
+[12/1/2022 11:53:52 AM][Thread-1][CLI] 
+************************* FILE - Summary *************************
+corpus_A [one=1140, two=63, three=7]
+******************************************************************
+[12/1/2022 11:53:53 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:53 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:55 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:55 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:57 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:57 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:53:59 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:53:59 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:54:00 AM][Thread-1][CLI] get corpus_A - Copy
+[12/1/2022 11:54:00 AM][Thread-1][CLI] 
+************************* FILE - Summary *************************
+corpus_A [one=1140, two=63, three=7]
+******************************************************************
+[12/1/2022 11:54:01 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:54:01 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:54:03 AM][Thread-1][CLI] clear
+[12/1/2022 11:54:03 AM][Thread-1][CLI] Unknown command.
+[12/1/2022 11:54:03 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:54:03 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:54:05 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:54:05 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:54:07 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:54:07 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:54:09 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:54:09 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:54:11 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:54:11 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:54:11 AM][Thread-1][CLI] exit
+[12/1/2022 11:54:11 AM][Thread-1][DirectoryCrawler] DirectoryCrawler shutted down.
+[12/1/2022 11:54:12 AM][Thread-1][JobDispatcher] JobDispatcher shutted down.
+[12/1/2022 11:54:12 AM][Thread-1][CLI] CLI shutted down.
+[12/1/2022 11:56:46 AM][Thread-1][CLI] CLI.Instance.LogToFile($"File chunk [{files.Length}] has been processing", nameof(FileJob));
+[12/1/2022 11:56:46 AM][Thread-1][CLI] Unknown command.
+[12/1/2022 11:56:57 AM][Thread-1][CLI] ad D:\source\Git\KeywordCounter\src\KeyWordCounterApp\KeyWordCounterApp\corpus_A\
+[12/1/2022 11:56:57 AM][Thread-1][DirectoryCrawler] Adding dir D:\source\Git\KeywordCounter\src\KeyWordCounterApp\KeyWordCounterApp\corpus_A\
+[12/1/2022 11:56:58 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:56:58 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:56:58 AM][Thread-8][FileJob] Starting file scan for get file|corpus_A
+[12/1/2022 11:56:58 AM][Thread-9][FileJob] File chunk [3] has been processing
+[12/1/2022 11:56:58 AM][Thread-9][FileJob] File chunk [3] completed.
+[12/1/2022 11:56:58 AM][Thread-9][FileJob] File chunk [3] has been processing
+[12/1/2022 11:56:58 AM][Thread-9][FileJob] File chunk [3] completed.
+[12/1/2022 11:56:58 AM][Thread-9][FileJob] Starting file scan for get file|corpus_A - Copy
+[12/1/2022 11:56:58 AM][Thread-8][FileJob] File chunk [3] has been processing
+[12/1/2022 11:56:58 AM][Thread-8][FileJob] File chunk [3] completed.
+[12/1/2022 11:56:58 AM][Thread-8][FileJob] File chunk [3] has been processing
+[12/1/2022 11:56:58 AM][Thread-8][FileJob] File chunk [3] completed.
+[12/1/2022 11:57:00 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:57:00 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:57:01 AM][Thread-1][CLI] file_ls
+[12/1/2022 11:57:01 AM][Thread-1][CLI] corpus_A corpus_A - Copy 
+[12/1/2022 11:57:02 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:57:02 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:57:04 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:57:04 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:57:06 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:57:06 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:57:08 AM][Thread-1][CLI] get corpus_A
+[12/1/2022 11:57:08 AM][Thread-1][CLI] 
+************************* FILE - Summary *************************
+corpus_A [one=1140, two=63, three=7]
+******************************************************************
+[12/1/2022 11:57:08 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A
+[12/1/2022 11:57:08 AM][Thread-5][JobDispatcher] Created a new job of type FILE - corpus_A - Copy
+[12/1/2022 11:57:09 AM][Thread-1][CLI] exit
+[12/1/2022 11:57:09 AM][Thread-1][DirectoryCrawler] DirectoryCrawler shutted down.
+[12/1/2022 11:57:10 AM][Thread-1][JobDispatcher] JobDispatcher shutted down.
+[12/1/2022 11:57:10 AM][Thread-1][CLI] CLI shutted down.

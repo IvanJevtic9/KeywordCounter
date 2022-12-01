@@ -12,6 +12,7 @@ public partial class Program
         Source.Cancel();
 
         DirectoryCrawler.Instance.Dispose();
+        JobDispatcher.Instance.Dispose();
         CLI.Instance.Dispose();
 
         Environment.Exit(0);

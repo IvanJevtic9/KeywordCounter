@@ -22,6 +22,7 @@ namespace KeyWordCounterApp.Implementation
         public void CreateAJob(IScanningJob job)
         {
             _jobQueue.Enqueue(job);
+            CLI.Instance.LogToFile($"Created a new job of type {job.GetJobType()} - {job.Name}", nameof(JobDispatcher));
 
             if (sleepMode)
             {
@@ -67,10 +68,11 @@ namespace KeyWordCounterApp.Implementation
         {
             if (Instance != null)
             {
-                CLI.Instance.ConsoleLog($"{nameof(JobDispatcher)} shutted down.", consoleColor: ConsoleColor.Green);
+                CLI.Instance.ConsoleLog($"{nameof(JobDispatcher)} shutted down.", nameof(JobDispatcher), consoleColor: ConsoleColor.Green);
                 _instance = null;
 
                 GC.SuppressFinalize(this);
+                Thread.Sleep(500);
             }
         }
     }

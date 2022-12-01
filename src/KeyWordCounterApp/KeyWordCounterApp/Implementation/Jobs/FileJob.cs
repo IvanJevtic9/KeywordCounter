@@ -26,6 +26,7 @@ namespace KeyWordCounterApp.Implementation.Jobs
 
         public async Task ExecuteJob()
         {
+            CLI.Instance.LogToFile($"Starting file scan for {GetQuery()}", nameof(FileJob));
             ResultRetriver.Instance.InitializeJobResult(this);
 
             var tasks = new List<Task>();
@@ -57,6 +58,8 @@ namespace KeyWordCounterApp.Implementation.Jobs
 
         private void ScanFile(FileInfo[] files)
         {
+            CLI.Instance.LogToFile($"File chunk [{files.Length}] has been processing", nameof(FileJob));
+
             int a = 0;
             int b = 0;
             int c = 0;
@@ -81,6 +84,7 @@ namespace KeyWordCounterApp.Implementation.Jobs
                 }
 
                 ResultRetriver.Instance.InsertResult(Name, new Result(a, b, c));
+                CLI.Instance.LogToFile($"File chunk [{files.Length}] completed.", nameof(FileJob));
             }
         }
     }

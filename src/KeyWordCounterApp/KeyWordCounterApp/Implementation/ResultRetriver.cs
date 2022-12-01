@@ -69,6 +69,16 @@ namespace KeyWordCounterApp.Implementation
             }
         }
 
+        public string ListFileResult()
+        {
+            var result = "";
+            foreach(var key in _result.Keys)
+            {
+                if (_result[key].Type == ScanType.FILE) result += $"{key} ";
+            }
+            return result;
+        }
+
         public string GetResult(string name)
         {
             var hasLock = _resultMutex.WaitOne();
@@ -89,7 +99,7 @@ namespace KeyWordCounterApp.Implementation
 
             var builder = new StringBuilder();
             
-            builder.AppendLine($"{Constants.GetStarBorder(25)} {value.Type.ToString()} - Summary {Constants.GetStarBorder(25)}");
+            builder.AppendLine($"\n{Constants.GetStarBorder(25)} {value.Type.ToString()} - Summary {Constants.GetStarBorder(25)}");
             builder.AppendLine($"{name} {value.Result.ToString()}");
             builder.Append($"{Constants.GetStarBorder(66)}");
 
