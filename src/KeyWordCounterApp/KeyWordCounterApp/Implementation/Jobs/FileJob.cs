@@ -64,7 +64,6 @@ namespace KeyWordCounterApp.Implementation.Jobs
             int b = 0;
             int c = 0;
 
-            string pattern = "[\r|\n|\t]";
             if (files.Length > 0)
             {
                 for (int index = 0; index < files.Length; index++)
@@ -73,8 +72,7 @@ namespace KeyWordCounterApp.Implementation.Jobs
                     using var st = new StreamReader(fs, Encoding.UTF8);
 
                     string content = st.ReadToEnd();
-                    content = Regex.Replace(content, pattern, " ");
-                    var words = content.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                    var words = content.Split(new string[3] { " ", "\r", "\n" }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
                     for (int i = 0; i < words.Length; i++)
                     {
                         if (words[i] == Program.AppSettings.KeyWords[0]) ++a;
